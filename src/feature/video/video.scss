@@ -1,3 +1,12 @@
+.preview {
+  position: absolute;
+  z-index: 1;
+  background: black;
+  color: #666;
+  width: 100vw;
+  height: 100vh;
+}
+
 .viewport {
   position: relative;
   padding: 5vh 0 10vh;

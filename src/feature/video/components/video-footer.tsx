@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect, MutableRefObject } from 'react';
+import React, { useState, useCallback, useContext, useEffect, MutableRefObject, SetStateAction, Dispatch } from 'react';
 import classNames from 'classnames';
 import { message } from 'antd';
 import ZoomContext from '../../../context/zoom-context';
@@ -31,6 +31,7 @@ interface VideoFooterProps {
   className?: string;
   shareRef?: MutableRefObject<HTMLCanvasElement | null>;
   sharing?: boolean;
+  setPreviewURL?: Dispatch<SetStateAction<string | undefined>>,
 }
 
 declare global {
@@ -42,7 +43,7 @@ declare global {
 
 const isAudioEnable = typeof AudioWorklet === 'function';
 const VideoFooter = (props: VideoFooterProps) => {
-  const { className, shareRef, sharing } = props;
+  const { className, shareRef, sharing, setPreviewURL } = props;
   const [isStartedAudio, setIsStartedAudio] = useState(false);
   const [isStartedVideo, setIsStartedVideo] = useState(false);
   const [audio, setAudio] = useState('');
@@ -249,23 +250,25 @@ const VideoFooter = (props: VideoFooterProps) => {
   const onRecordingClick = async (key: string) => {
     switch (key) {
       case 'Record': {
-        // eslint-disable-next-line no-undef
         window.recorder.startRecording();
         await recordingClient?.startCloudRecording();
         break;
       }
       case 'Resume': {
+        window.recorder.resumeRecording()
         await recordingClient?.resumeCloudRecording();
         break;
       }
       case 'Stop': {
+        window.recorder.stopRecording();
         await recordingClient?.stopCloudRecording();
-        await window.recorder.stopRecording();
         let blob = await window.recorder.getBlob();
-        window.invokeSaveAsDialog(blob, 'video.webm');
+        setPreviewURL?.(window.URL.createObjectURL(blob));
+        // window.invokeSaveAsDialog(blob, 'video.webm');
         break;
       }
       case 'Pause': {
+        window.recorder.pauseRecording()
         await recordingClient?.pauseCloudRecording();
         break;
       }
@@ -273,6 +276,7 @@ const VideoFooter = (props: VideoFooterProps) => {
         break;
       }
       default: {
+        window.recorder.startRecording();
         await recordingClient?.startCloudRecording();
       }
     }

@@ -16,36 +16,43 @@ const Home: React.FunctionComponent<HomeProps> = (props) => {
       history.push(`/${type}${location.search}`);
   };
   const featureList = [
+    // {
+    //   key: 'video',
+    //   icon: 'icon-meeting',
+    //   title: 'Audio, video and share',
+    //   description: 'Gallery Layout, Start/Stop Audio, Mute/Unmute, Start/Stop Video, Start/Stop Screen Share'
+    // },
+    // {
+    //   key: 'chat',
+    //   icon: 'icon-chat',
+    //   title: 'Session chat',
+    //   description: 'Session Chat, Chat Priviledge'
+    // },
+    // {
+    //   key: 'command',
+    //   icon: 'icon-chat',
+    //   title: 'Command Channel chat',
+    //   description: 'Session Command Channel chat'
+    // },
+    // {
+    //   key: 'Subsession',
+    //   icon: 'icon-group',
+    //   title: 'Subsession',
+    //   description: 'Open/Close Subsession, Assign/Move Participants into Subsession, Join/Leave Subsession'
+    // },
+    // {
+    //   key: 'preview',
+    //   icon: 'icon-meeting',
+    //   title: 'Local Preview',
+    //   description: 'Audio and Video preview'
+    // },
     {
-      key: 'video',
+      key: 'record-preview',
       icon: 'icon-meeting',
-      title: 'Audio, video and share',
-      description: 'Gallery Layout, Start/Stop Audio, Mute/Unmute, Start/Stop Video, Start/Stop Screen Share'
-    },
-    {
-      key: 'chat',
-      icon: 'icon-chat',
-      title: 'Session chat',
-      description: 'Session Chat, Chat Priviledge'
-    },
-    {
-      key: 'command',
-      icon: 'icon-chat',
-      title: 'Command Channel chat',
-      description: 'Session Command Channel chat'
-    },
-    {
-      key: 'Subsession',
-      icon: 'icon-group',
-      title: 'Subsession',
-      description: 'Open/Close Subsession, Assign/Move Participants into Subsession, Join/Leave Subsession'
-    },
-    {
-      key: 'preview',
-      icon: 'icon-meeting',
-      title: 'Local Preview',
-      description: 'Audio and Video preview'
+      title: 'Record and preview',
+      description: 'Record yourself, then preview the recording and decide if you want to keep the video'
     }
+
   ];
   let actionText;
   if (status === 'connected') {

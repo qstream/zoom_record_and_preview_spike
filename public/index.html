@@ -14,8 +14,6 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- use 5.5.9 or any other version on cdnjs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.9/RecordRTC.js"></script>
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -41,21 +39,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script>
-    const sleep = m => new Promise(r => setTimeout(r, m));
-
-    (async ()=>{
-      await sleep(10000)
-        console.log('hello wooooo')
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        // eslint-disable-next-line no-undef
-        window.recorder = new RecordRTCPromisesHandler(stream, {
-          type: 'video'
-        });
-
-    })()
-    
-  </script>
   </body>
 </html>
 

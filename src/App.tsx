@@ -19,6 +19,7 @@ import LoadingLayer from './component/loading-layer';
 import Chat from './feature/chat/chat';
 import Command from './feature/command/command';
 import Subsession from './feature/subsession/subsession';
+import RecordPreview from './feature/record-preview/record-preview';
 import {
   ChatClient,
   CommandChannelClient,
@@ -253,6 +254,7 @@ function App(props: AppProps) {
                         <Route path="/index.html" component={Home} exact />
                         <Route path="/chat" component={Chat} />
                         <Route path="/command" component={Command} />
+                        <Route path="/record-preview" component={RecordPreview} />
                         <Route
                           path="/video"
                           component={isSupportGalleryView ? Video : galleryViewWithoutSAB ? VideoNonSAB : VideoSingle}
