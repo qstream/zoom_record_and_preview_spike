@@ -33,6 +33,13 @@ interface VideoFooterProps {
   sharing?: boolean;
 }
 
+declare global {
+  interface Window {
+    recorder: any;
+    invokeSaveAsDialog: any;
+  }
+}
+
 const isAudioEnable = typeof AudioWorklet === 'function';
 const VideoFooter = (props: VideoFooterProps) => {
   const { className, shareRef, sharing } = props;
@@ -242,6 +249,8 @@ const VideoFooter = (props: VideoFooterProps) => {
   const onRecordingClick = async (key: string) => {
     switch (key) {
       case 'Record': {
+        // eslint-disable-next-line no-undef
+        window.recorder.startRecording();
         await recordingClient?.startCloudRecording();
         break;
       }
@@ -251,6 +260,9 @@ const VideoFooter = (props: VideoFooterProps) => {
       }
       case 'Stop': {
         await recordingClient?.stopCloudRecording();
+        await window.recorder.stopRecording();
+        let blob = await window.recorder.getBlob();
+        window.invokeSaveAsDialog(blob, 'video.webm');
         break;
       }
       case 'Pause': {
@@ -459,3 +471,6 @@ const VideoFooter = (props: VideoFooterProps) => {
   );
 };
 export default VideoFooter;
+function invokeSaveAsDialog(blob: any) {
+  throw new Error('Function not implemented.');
+}
