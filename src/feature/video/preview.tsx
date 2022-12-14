@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import 'preview.scss'
+import './preview.scss'
 
 interface PreviewProps {
   previewURL: string;

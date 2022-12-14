@@ -39,20 +39,6 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (
     }
   );
 
-  useEffect(() => {
-    const setup = async () => {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-      window.recorder = new RecordRTCPromisesHandler(stream, {
-        type: "video",
-        mimeType: "video/webm",
-      });
-    };
-    setup();
-  }, []);
-
   const [previewURL, setPreviewURL] = useState<string>();
 
   return (

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ZoomContext from "../../context/zoom-context";
 import Video from "../video/video";
 import VideoSingle from "../video/video-single";
 import { useBroadcastMessage } from "./hooks/useBroadcastMessage";
 import MediaContext from "../../context/media-context";
+import { RecordRTCPromisesHandler } from "recordrtc";
 const RecordPreviewContainer: React.FunctionComponent<RouteComponentProps> = (
   props
 ) => {
@@ -12,6 +13,20 @@ const RecordPreviewContainer: React.FunctionComponent<RouteComponentProps> = (
   const { mediaStream } = useContext(MediaContext);
 
   useBroadcastMessage(zmClient);
+
+  useEffect(() => {
+    const setup = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
+      window.recorder = new RecordRTCPromisesHandler(stream, {
+        type: "video",
+        mimeType: "video/webm",
+      });
+    };
+    setup();
+  }, [])
 
   return (
     <div>
