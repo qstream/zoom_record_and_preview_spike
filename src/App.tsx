@@ -8,7 +8,6 @@ import Home from './feature/home/home';
 import Video from './feature/video/video';
 import VideoSingle from './feature/video/video-single';
 import VideoNonSAB from './feature/video/video-non-sab';
-import Preview from './feature/preview/preview';
 import ZoomContext from './context/zoom-context';
 import ZoomMediaContext from './context/media-context';
 import ChatContext from './context/chat-context';
@@ -16,9 +15,6 @@ import CommandContext from './context/cmd-context';
 import LiveTranscriptionContext from './context/live-transcription';
 import RecordingContext from './context/recording-context';
 import LoadingLayer from './component/loading-layer';
-import Chat from './feature/chat/chat';
-import Command from './feature/command/command';
-import Subsession from './feature/subsession/subsession';
 import RecordPreview from './feature/record-preview/record-preview';
 import {
   ChatClient,
@@ -252,15 +248,11 @@ function App(props: AppProps) {
                           exact
                         />
                         <Route path="/index.html" component={Home} exact />
-                        <Route path="/chat" component={Chat} />
-                        <Route path="/command" component={Command} />
                         <Route path="/record-preview" component={RecordPreview} />
                         <Route
                           path="/video"
                           component={isSupportGalleryView ? Video : galleryViewWithoutSAB ? VideoNonSAB : VideoSingle}
                         />
-                        <Route path="/subsession" component={Subsession} />
-                        <Route path="/preview" component={Preview} />
                       </Switch>
                     </Router>
                   </LiveTranscriptionContext.Provider>
