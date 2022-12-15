@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useContext, useRef } from "react";
 import classnames from "classnames";
 import { RouteComponentProps } from "react-router-dom";
 import ZoomContext from "../../context/zoom-context";
@@ -8,7 +8,6 @@ import { useCanvasDimension } from "./hooks/useCanvasDimension";
 import { useGalleryLayout } from "./hooks/useGalleryLayout";
 import { usePagination } from "./hooks/usePagination";
 import "./video.scss";
-import { RecordRTCPromisesHandler } from "recordrtc";
 import Preview from "./preview";
 
 const VideoContainer: React.FunctionComponent<RouteComponentProps> = (

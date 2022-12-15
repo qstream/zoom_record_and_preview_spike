@@ -1,4 +1,4 @@
-import { CellLayout, Position } from './video-types';
+import { CellLayout } from './video-types';
 import { VideoQuality } from '@zoom/videosdk';
 interface Grid {
   row: number;

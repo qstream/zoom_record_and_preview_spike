@@ -475,6 +475,3 @@ const VideoFooter = (props: VideoFooterProps) => {
   );
 };
 export default VideoFooter;
-function invokeSaveAsDialog(blob: any) {
-  throw new Error('Function not implemented.');
-}

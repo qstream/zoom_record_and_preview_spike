@@ -1,16 +1,11 @@
 import React from 'react';
-import { Button, Tooltip } from 'antd';
+import { Button } from 'antd';
 import classNames from 'classnames';
 import { IconFont } from '../../../component/icon-font';
 import './live-transcription.scss';
 interface LiveTranscriptionButtonProps {
   isStartedLiveTranscription: boolean;
   onLiveTranscriptionClick: () => void;
-}
-
-interface LiveTranscriptionLockButtonProps {
-  isLockedLiveTranscription: boolean;
-  onLiveTranscriptionLockClick: () => void;
 }
 
 const LiveTranscriptionButton = (props: LiveTranscriptionButtonProps) => {

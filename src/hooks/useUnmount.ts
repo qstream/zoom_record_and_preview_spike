@@ -13,6 +13,7 @@ export function useUnmount(fn: Function) {
   );
 }
 
+/* eslint-disable react-hooks/exhaustive-deps */
 export function useMount(fn: Function) {
   useEffect(() => {
     fn();
