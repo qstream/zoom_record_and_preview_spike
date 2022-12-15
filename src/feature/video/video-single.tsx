@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useContext, useRef, useState, useCallback, useEffect, useMemo, Dispatch, SetStateAction } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { VideoQuality } from '@zoom/videosdk';
 import classnames from 'classnames';
@@ -14,11 +14,14 @@ import './video.scss';
 import { isAndroidBrowser, isSupportOffscreenCanvas } from '../../utils/platform';
 import { SELF_VIDEO_ID } from './video-constants';
 import { useLocalVolume } from './hooks/useLocalVolume';
-import Preview from "./preview";
 
 const isUseVideoElementToDrawSelfVideo = isAndroidBrowser() || isSupportOffscreenCanvas();
 
-const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => {
+interface VideoContainerProps extends RouteComponentProps {
+  setPreviewURL?: Dispatch<SetStateAction<string | undefined>>,
+}
+
+const VideoContainer: React.FunctionComponent<VideoContainerProps> = (props) => {
   const zmClient = useContext(ZoomContext);
   const {
     mediaStream,
@@ -94,14 +97,8 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => 
     }
   });
 
-  const [previewURL, setPreviewURL] = useState<string>();
-
   return (
     <div className="viewport">
-      {previewURL && (
-        <Preview previewURL={previewURL} setPreviewURL={setPreviewURL}/>
-      )}
-
       <div
         className={classnames('video-container')}
       >
@@ -135,7 +132,7 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => 
           />
         )}
       </div>
-      <VideoFooter className="video-operations" setPreviewURL={setPreviewURL} />
+      <VideoFooter className="video-operations" setPreviewURL={props.setPreviewURL} />
     </div>
   );
 };

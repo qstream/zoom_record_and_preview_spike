@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ZoomContext from "../../context/zoom-context";
 import Video from "../video/video";
@@ -6,6 +6,7 @@ import VideoSingle from "../video/video-single";
 import { useBroadcastMessage } from "./hooks/useBroadcastMessage";
 import MediaContext from "../../context/media-context";
 import { RecordRTCPromisesHandler } from "recordrtc";
+import Preview from "../video/preview";
 const RecordPreviewContainer: React.FunctionComponent<RouteComponentProps> = (
   props
 ) => {
@@ -26,14 +27,20 @@ const RecordPreviewContainer: React.FunctionComponent<RouteComponentProps> = (
       });
     };
     setup();
-  }, [])
+  }, []);
+
+  const [previewURL, setPreviewURL] = useState<string>();
 
   return (
     <div>
+      {previewURL && (
+        <Preview previewURL={previewURL} setPreviewURL={setPreviewURL} />
+      )}
+
       {mediaStream?.isSupportMultipleVideos() ? (
-        <Video {...props} />
+        <Video {...props} setPreviewURL={setPreviewURL} />
       ) : (
-        <VideoSingle {...props} />
+        <VideoSingle {...props} setPreviewURL={setPreviewURL} />
       )}
     </div>
   );

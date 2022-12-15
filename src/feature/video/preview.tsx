@@ -12,7 +12,7 @@ const Preview: React.FunctionComponent<PreviewProps> = ({
 }) => {
   return (
     <div className="preview">
-      <video width="800" height="600" controls>
+      <video width="1440" height="649" controls>
         <source src={previewURL} type="video/webm" />
         Can't play video
       </video>
